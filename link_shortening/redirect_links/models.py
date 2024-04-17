@@ -15,9 +15,10 @@ char = ['a','b','c','d','f','g','h','i','j',
 #             not_unique = False
 #     return unique_ref
 
-class Links(models.Model):
-
+class Companies(models.Model):
+    name = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
     short_link = models.CharField(max_length=64, unique=True)
+    user_id = models.IntegerField(blank=True, null=True)
 
 

@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+    color: #1d1d41;
+}
+h1{
+    margin: 16px 0 8px;
+}
+.btn{
+    background-color: #1d1d41;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+}
+.header{
+    display: flex;
+    box-shadow: 1px 1px 5px 0px #1d1d41bf;
+    padding: 8px 0;
+}
+.cont{
+    padding: 0 8px;
+    margin: 0 auto;
+    width: 70%;
+}
+.logo{
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d1d41;
+    text-decoration: none;
+}
