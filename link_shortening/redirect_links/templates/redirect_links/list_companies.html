@@ -1,8 +1,77 @@
 {% extends "redirect_links/base.html" %}
+{% load static %}
 
-{% block title %}{% endblock title %}
-{% block h1 %}{% endblock h1 %}
+{% block title %}Кампании{% endblock title %}
+{% block h1 %}Кампании{% endblock h1 %}
 
 {% block content %}
-<a href="{% url "add_company" %}">Создать новую кампанию</a>
+    <div class='content-box-top'>
+        <form action="" class='search'>
+            <input type="text" name="search" class='input' id="search" placeholder='Поиск...'>
+            <input type="submit" value="Искать" class='btn'>
+        </form>
+        <a href="{% url "add_company" %}" class='link-btn'>
+            <img src="{% static "icon/add.svg" %}">
+            <span>
+                Создать новую кампанию
+            </span>
+        </a>
+    </div>
+    <table class='list-companies'>
+        <thead>
+            <tr>
+                <th>Номер №</th>
+                <th>Название</th>
+                <th>Дата создания</th>
+                <th>Управление</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>№:12</td>
+                <td>
+                    <a href="">
+                        <h3>Название кампании</h3>
+                    </a>
+                </td>
+                <td>15.04.2024</td>
+                <td>
+                    <a href="" class='link-btn'>
+                        <img src="{% static "icon/delete.svg" %}">
+                        <span>Удалить</span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>№:12</td>
+                <td>
+                    <a href="">
+                        <h3>Название кампании</h3>
+                    </a>
+                </td>
+                <td>15.04.2024</td>
+                <td>
+                    <a href="" class='link-btn'>
+                        <img src="{% static "icon/delete.svg" %}">
+                        <span>Удалить</span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>№:12</td>
+                <td>
+                    <a href="">
+                        <h3>Название кампании</h3>
+                    </a>
+                </td>
+                <td>15.04.2024</td>
+                <td>
+                    <a href="" class='link-btn'>
+                        <img src="{% static "icon/delete.svg" %}">
+                        <span>Удалить</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 {% endblock content %}

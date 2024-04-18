@@ -14,21 +14,24 @@
     <header class='header'>
         <div class='cont'>
             <a class='logo' href='{% url "list_companies" %}'>
-                WWW_Linker
+                <img src="{% static "logo/logo.svg" %}">
+                <span>SLR</span>
             </a>
             <div class='login'>
                 
             </div>
         </div>
     </header>
-    <main>
+    <main class='main'>
         <div class='cont'>
             <h1>{% block h1 %}{% endblock h1 %}</h1>
             {% block content %}{% endblock content %}
         </div>  
     </main>
-    <footer>
-
+    <footer class='footer'>
+        <div class='cont'>
+            Политика конфенденциальности
+        </div>
     </footer>
 </body>
 </html>
