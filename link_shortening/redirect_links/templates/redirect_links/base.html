@@ -24,6 +24,7 @@
     </header>
     <main class='main'>
         <div class='cont'>
+            {% block above_h1 %}{% endblock above_h1 %}
             <h1>{% block h1 %}{% endblock h1 %}</h1>
             {% block content %}{% endblock content %}
         </div>  
@@ -33,5 +34,6 @@
             Политика конфенденциальности
         </div>
     </footer>
+    {% block js %}{% endblock js %}
 </body>
 </html>

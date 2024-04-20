@@ -10,7 +10,10 @@ body{
     min-height: 100vh;
 }
 h1{
-    margin: 64px 0 32px;
+    margin: 32px 0;
+}
+h2{
+    margin:32px 0 16px;
 }
 a{
     color: #6363c2;
@@ -49,12 +52,14 @@ a{
     display: flex;
     box-shadow: 1px 1px 5px 0px #1d1d41bf;
     padding: 16px 0;
+    margin-bottom: 64px;
 }
 .main{
     flex-grow: 1;
 }
 .footer{
     background-color: #f1f1fd;
+    margin-top: 64px;
 }
 .cont{
     padding: 0 8px;
@@ -74,16 +79,16 @@ a{
     justify-content: space-between;
     padding: 16px 0 32px;
 }
-.list-companies{
+.table-list{
     width: 100%;
     border-collapse: collapse;
 }
-.list-companies th{
+.table-list th{
     text-align: left;
     padding: 16px 8px;
     background-color: #f1f1fd;
 }
-.list-companies td{
+.table-list td{
     padding: 16px 8px;
     border-bottom: 1px solid #1d1d41;
 }

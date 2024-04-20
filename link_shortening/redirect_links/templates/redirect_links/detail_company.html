@@ -1,13 +1,85 @@
 {% extends "redirect_links/base.html" %}
+{% load static %}
 
 {% block title %}{{ company.name }}{% endblock title %}
 {% block h1 %}{{ company.name }}{% endblock h1 %}
-
+{% block above_h1 %}
+<div>
+    <a href="{% url "list_companies" %}" class='link-btn'>
+        <img src="{% static "icon/left-arrow.svg" %}">
+        <span>
+            Comeback
+        </span>
+    </a>
+</div>
+{% endblock above_h1 %}
 {% block content %}
     <a href="{% url "redirect" company.short_link %}">
         {% url "redirect" company.short_link %}
     </a>
     <div>
-        Статистика тут
+        <h2>Statistics</h2>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <table class='table-list'>
+            <thead>
+                <tr>
+                    <th>
+                        Data
+                    </th>
+                    <th>
+                        IP
+                    </th>
+                    <th>
+                        Browser
+                    </th>
+                    <th>
+                        City
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        21.02.24
+                    </td>
+                    <td>
+                        127.0.0.8
+                    </td>
+                    <td>
+                        FireFox
+                    </td>
+                    <td>
+                        Novosibirsk
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 {% endblock content %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+{% endblock js %}

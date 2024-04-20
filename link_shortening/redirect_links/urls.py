@@ -7,4 +7,5 @@ urlpatterns = [
     path('linker/<str:id>/', views.detail_company, name='detail_company'),
     path('linker/<str:id>/delete/', views.delete_company, name='delete_company'),
     path('<slug:short_link>', views.redirect_link, name='redirect'),
+    
 ]
