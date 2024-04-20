@@ -1,0 +1,13 @@
+{% extends "redirect_links/base.html" %}
+
+{% block title %}{{ company.name }}{% endblock title %}
+{% block h1 %}{{ company.name }}{% endblock h1 %}
+
+{% block content %}
+    <a href="{% url "redirect" company.short_link %}">
+        {% url "redirect" company.short_link %}
+    </a>
+    <div>
+        Статистика тут
+    </div>
+{% endblock content %}

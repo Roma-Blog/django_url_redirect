@@ -27,51 +27,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>№:12</td>
-                <td>
-                    <a href="">
-                        <h3>Название кампании</h3>
-                    </a>
-                </td>
-                <td>15.04.2024</td>
-                <td>
-                    <a href="" class='link-btn'>
-                        <img src="{% static "icon/delete.svg" %}">
-                        <span>Удалить</span>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>№:12</td>
-                <td>
-                    <a href="">
-                        <h3>Название кампании</h3>
-                    </a>
-                </td>
-                <td>15.04.2024</td>
-                <td>
-                    <a href="" class='link-btn'>
-                        <img src="{% static "icon/delete.svg" %}">
-                        <span>Удалить</span>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>№:12</td>
-                <td>
-                    <a href="">
-                        <h3>Название кампании</h3>
-                    </a>
-                </td>
-                <td>15.04.2024</td>
-                <td>
-                    <a href="" class='link-btn'>
-                        <img src="{% static "icon/delete.svg" %}">
-                        <span>Удалить</span>
-                    </a>
-                </td>
-            </tr>
+            {% for company in companies %}
+                <tr>
+                    <td>{{ company.id }}</td>
+                    <td>
+                        <a href="{% url "detail_company" company.id %}">
+                            <h3>{{ company.name }}</h3>
+                        </a>
+                    </td>
+                    <td>{{ company.data }}</td>
+                    <td>
+                        <a href="{% url "delete_company" company.id %}" class='link-btn'>
+                            <img src="{% static "icon/delete.svg" %}">
+                            <span>Удалить</span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock content %}

@@ -1,15 +1,7 @@
 from django.shortcuts import redirect, render
 from .forms import CompaniesForm
 from .models import Companies, Sesions
-import random
-
-# def get_client_ip(request):
-#     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-#     if x_forwarded_for:
-#         ip = x_forwarded_for.split(',')[-1].strip()
-#     else:
-#         ip = request.META.get('REMOTE_ADDR')
-#     return ip
+import random, requests
 
 def generate_short_link() -> str:
     char = ['a','b','c','d','f','g','h','i','j',
@@ -24,6 +16,14 @@ def generate_short_link() -> str:
             not_unique = False
     return unique_ref
 
+def get_city(ip):
+    try:
+        city = requests.get('http://ipwho.is/' + ip + '?lang=ru')
+        return city.json()['city']
+    except KeyError:
+        return 'Неопределен'
+
+
 def redirect_link(request, short_link):
     ip_user = request.META.get('HTTP_X_FORWARDED_FOR')
     if not ip_user:
@@ -35,13 +35,17 @@ def redirect_link(request, short_link):
         user_id = 1,
         ip_user = ip_user,
         browser = request.META.get('HTTP_USER_AGENT'),
-        city = 'Moscva'
+        city = get_city(ip_user)
     )
 
-    return redirect(company.link)
+    return redirect(company.link, permanent=True)
 
 def list_companies(request):
-    return render(request, 'redirect_links/list_companies.html')
+    companies = Companies.objects.all()
+    context = {
+        'companies': companies
+    }
+    return render(request, 'redirect_links/list_companies.html', context)
 
 def add_company(request):
     
@@ -58,3 +62,14 @@ def add_company(request):
         'form': form
     }
     return render(request, 'redirect_links/add_company.html', context)
+
+def detail_company(request, id):
+    company = Companies.objects.get(id = id)
+    context = {
+        'company': company
+    }
+    return render(request, 'redirect_links/detail_company.html', context)
+
+def delete_company(request, id):
+    Companies.objects.get(id = id).delete()
+    return redirect('list_companies')
