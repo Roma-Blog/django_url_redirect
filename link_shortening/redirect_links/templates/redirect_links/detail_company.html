@@ -5,12 +5,7 @@
 {% block h1 %}{{ company.name }}{% endblock h1 %}
 {% block above_h1 %}
 <div>
-    <a href="{% url "list_companies" %}" class='link-btn'>
-        <img src="{% static "icon/left-arrow.svg" %}">
-        <span>
-            Comeback
-        </span>
-    </a>
+    {% include "redirect_links/components/comeback.html" %}
 </div>
 {% endblock above_h1 %}
 {% block content %}

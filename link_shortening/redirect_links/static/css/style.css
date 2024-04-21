@@ -48,6 +48,21 @@ a{
     border: 2px solid #d9d9eb;
     padding: 6px 14px;
 }
+.add-edit-form .input{
+    display: block;
+    width: 50%;
+}
+
+.add-edit-form div{
+    margin-bottom: 16px;
+}
+
+label{
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
 .header{
     display: flex;
     box-shadow: 1px 1px 5px 0px #1d1d41bf;

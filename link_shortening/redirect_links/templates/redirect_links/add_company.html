@@ -3,8 +3,14 @@
 {% block title %}Новая кампания{% endblock title %}
 {% block h1 %}Новая кампания{% endblock h1 %}
 
+
+{% block above_h1 %}
+    <div>
+        {% include "redirect_links/components/comeback.html" %}
+    </div>
+{% endblock above_h1 %}
 {% block content %}
-    <form action="" method="post">
+    <form action="" method="post" class='add-edit-form'>
         {% csrf_token %}
         {{form}}
         <input class='btn' type="submit" value="Создать">

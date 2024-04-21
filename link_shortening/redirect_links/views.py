@@ -20,8 +20,8 @@ def get_city(ip):
     try:
         city = requests.get('http://ipwho.is/' + ip + '?lang=ru')
         return city.json()['city']
-    except KeyError:
-        return 'Неопределен'
+    except:
+        return 'Неизвестно'
 
 
 def redirect_link(request, short_link):
@@ -30,9 +30,9 @@ def redirect_link(request, short_link):
         ip_user = request.META.get('REMOTE_ADDR')
 
     company = Companies.objects.get(short_link = short_link)
+
     Sesions.objects.create(
-        id_company = company.id,
-        user_id = 1,
+        id_company = company,
         ip_user = ip_user,
         browser = request.META.get('HTTP_USER_AGENT'),
         city = get_city(ip_user)
