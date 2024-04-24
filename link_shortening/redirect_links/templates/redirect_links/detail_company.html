@@ -35,20 +35,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        21.02.24
-                    </td>
-                    <td>
-                        127.0.0.8
-                    </td>
-                    <td>
-                        FireFox
-                    </td>
-                    <td>
-                        Novosibirsk
-                    </td>
-                </tr>
+                {% for item in sesions %}
+                    <tr>
+                        <td>
+                            {{ item.data }}
+                        </td>
+                        <td>
+                            {{ item.ip_user }}
+                        </td>
+                        <td>
+                            {{ item.browser }}
+                        </td>
+                        <td>
+                            {{ item.city }}
+                        </td>
+                    </tr>
+                {% endfor %}
+
             </tbody>
         </table>
     </div>
@@ -61,10 +64,14 @@
   new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: [
+      {% for data in list_data %} '{{ data }}', {% endfor %}
+      ],
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: 'Посещений в день',
+        data: [
+        {% for count_sesions in list_count_sesions %}{{ count_sesions}},{% endfor %},
+        ],
         borderWidth: 1
       }]
     },

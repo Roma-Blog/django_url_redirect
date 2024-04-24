@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.http import Http404
 from .forms import CompaniesForm
 from .models import Companies, Sesions
 import random, requests
@@ -25,11 +26,15 @@ def get_city(ip):
 
 
 def redirect_link(request, short_link):
+
+    try:
+        company = Companies.objects.get(short_link = short_link)
+    except Companies.DoesNotExist:
+        raise Http404
+
     ip_user = request.META.get('HTTP_X_FORWARDED_FOR')
     if not ip_user:
         ip_user = request.META.get('REMOTE_ADDR')
-
-    company = Companies.objects.get(short_link = short_link)
 
     Sesions.objects.create(
         id_company = company,
@@ -65,8 +70,20 @@ def add_company(request):
 
 def detail_company(request, id):
     company = Companies.objects.get(id = id)
+    sesions = Sesions.objects.filter(id_company = id)
+    list_data = sorted(set(item.data for item in sesions))
+    list_count_sesions = []
+    for item in list_data:
+        list_count_sesions.append(sesions.filter(data = item).count())
+
+    print(list_data)
+    print(list_count_sesions)
+        
     context = {
-        'company': company
+        'company': company,
+        'sesions': sesions,
+        'list_data': list_data,
+        'list_count_sesions': list_count_sesions
     }
     return render(request, 'redirect_links/detail_company.html', context)
 
