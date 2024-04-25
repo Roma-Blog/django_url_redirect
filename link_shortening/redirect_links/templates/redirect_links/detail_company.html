@@ -13,8 +13,13 @@
         {% url "redirect" company.short_link %}
     </a>
     <div>
-        <h2>Statistics</h2>
-        <div>
+        <h2>Статистика</h2>
+        <form action="" method="get">
+            <input type="date" name="beginning" id="">
+            <input type="date" name="end" id="">
+            <input type="submit" value="Показать">
+        </form>
+        <div class='diagram'>
             <canvas id="myChart"></canvas>
         </div>
         <table class='table-list'>
@@ -62,26 +67,15 @@
   const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
-      labels: [
-      {% for data in list_data %} '{{ data }}', {% endfor %}
-      ],
       datasets: [{
-        label: 'Посещений в день',
-        data: [
-        {% for count_sesions in list_count_sesions %}{{ count_sesions}},{% endfor %},
-        ],
-        borderWidth: 1
+        data: [{{sesions_data|safe}}]
       }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
     }
-  });
+  }).resize(1000, 450)
+
 </script>
 {% endblock js %}
+
+

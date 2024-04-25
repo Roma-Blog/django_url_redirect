@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import Http404
 from .forms import CompaniesForm
 from .models import Companies, Sesions
-import random, requests
+import random, requests, datetime
 
 def generate_short_link() -> str:
     char = ['a','b','c','d','f','g','h','i','j',
@@ -69,21 +69,30 @@ def add_company(request):
     return render(request, 'redirect_links/add_company.html', context)
 
 def detail_company(request, id):
-    company = Companies.objects.get(id = id)
-    sesions = Sesions.objects.filter(id_company = id)
-    list_data = sorted(set(item.data for item in sesions))
-    list_count_sesions = []
-    for item in list_data:
-        list_count_sesions.append(sesions.filter(data = item).count())
+    data_beginning = datetime.date.today() - datetime.timedelta(days=7)
+    data_end = datetime.date.today()
 
-    print(list_data)
-    print(list_count_sesions)
+    if request.method == 'GET':
+        if request.GET.get('beginning') and request.GET.get('end'):
+            data_beginning = request.GET.get('beginning')
+            data_end = request.GET.get('end')
+    
+    count_days = (data_end - data_beginning).days
+    sesions = Sesions.objects.filter(id_company = id)
+    company = Companies.objects.get(id = id)
+    list_data = list(item.data for item in sesions)
+    sesions_data: str = ''
+
+    for i in range(1, count_days + 1):
+        if data_beginning + datetime.timedelta(days=i) in list_data:
+            sesions_data = sesions_data + '{' + f'x: "{data_beginning + datetime.timedelta(days=i)}", y: {list_data.count(data_beginning + datetime.timedelta(days=i))}' + '},'
+        else:
+            sesions_data = sesions_data + '{' + f'x: "{data_beginning + datetime.timedelta(days=i)}", y: 0' + '},'
         
     context = {
         'company': company,
         'sesions': sesions,
-        'list_data': list_data,
-        'list_count_sesions': list_count_sesions
+        'sesions_data': sesions_data
     }
     return render(request, 'redirect_links/detail_company.html', context)
 
