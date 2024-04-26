@@ -15,8 +15,8 @@
     <div>
         <h2>Статистика</h2>
         <form action="" method="get">
-            <input type="date" name="beginning" id="">
-            <input type="date" name="end" id="">
+            <input type="date" name="beginning" value="{{data_beginning}}" min="{{min_data}}" max = "{{max_data}}">
+            <input type="date" name="end" value="{{data_end}}" min="{{min_data}}" max = "{{max_data}}">
             <input type="submit" value="Показать">
         </form>
         <div class='diagram'>
